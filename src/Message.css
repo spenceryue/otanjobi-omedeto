@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+#message {
+  width: 100%;
+  height: 50%;
+  top: -10%;
+  margin: auto;
+  position: absolute;
+  opacity: 0;
+}
+text {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 3.5em;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  fill: #0fc1ee;
+  /* text-shadow: 0 0 14px #334145; */
+  animation: fade 3s infinite;
+  animation-play-state: paused;
+  cursor: pointer;
+}
+path {
+  fill: none;
+  stroke-width: 1.5px;
+}
+svg {
+  overflow: visible;
+}
+@keyframes fade {
+  60% {
+    fill: #ecf0f1;
+    /* transform: scale(1.1); */
+    transform-origin: 50% 0%;
+  }
+}

@@ -26,35 +26,38 @@ export default class Dancing extends React.Component {
   componentDidMount() {
     this.music = document.getElementById('music');
     // var music = this.musicElem;
-    var isPlaying = false;
+    var isPlaying = !this.music.paused;
+    console.log({ isPlaying });
     // musica.volume = 0.2;
 
     const dance = document.querySelector('.dance-animation');
 
     this.togglePlay = () => {
       if (isPlaying) {
-        // musica.pause();
+        // if (isPlaying || dance.style.animationPlayState === 'running') {
+        console.log('pausing...', document.getElementById('music'));
         this.music.pause();
+        // document.getElementById('music').play();
+        // document.querySelector('audio').pause();
+        isPlaying = false;
         dance.style.animationPlayState = 'paused';
       } else {
-        // musica.play();
-        // if (this.music.readyState < 2) {
-        //   setTimeout(this.togglePlay);
-        //   return;
-        // }
-        this.music.play().catch(e => console.log('oh no', e));
+        console.log('playing...');
+        this.music.play();
+        // document.getElementById('music').play();
+        isPlaying = true;
         dance.style.animationPlayState = 'running';
       }
     };
 
     const musicAnim = document.getElementById('music-animation');
     this.music.onplaying = function() {
-      isPlaying = true;
       musicAnim.classList.add('on');
+      // isPlaying = true;
     };
     this.music.onpause = function() {
-      isPlaying = false;
       musicAnim.classList.remove('on');
+      // isPlaying = false;
     };
 
     var button = document.getElementById('toggle');
@@ -69,6 +72,7 @@ export default class Dancing extends React.Component {
         button.innerHTML = button.getAttribute('data-text-swap');
       }
       self.togglePlay();
+      // self.music.pause();
       document.querySelector('#message').click();
     };
     button.addEventListener('click', handler, false);
@@ -86,8 +90,14 @@ export default class Dancing extends React.Component {
         dance.style.animationPlayState = 'running';
       }, 500);
     };
-    this.music.pause();
-    startup();
+    // this.music.pause();
+    // isPlaying = false;
+    // this.togglePlay();
+    // startup();
+    dance.style.animationPlayState = 'running';
+    button.setAttribute('data-text-original', button.innerHTML);
+    button.innerHTML = button.getAttribute('data-text-swap');
+    document.querySelector('#message').click();
     // this.music.play();
     // isPlaying = true;
   }

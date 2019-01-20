@@ -9,10 +9,10 @@ class App extends Component {
   started = false;
   // audio = document.querySelector('audio');
   startup = () => {
-    console.log('found it?', document.querySelector('audio'));
     document.querySelector('audio')!.play();
     this.started = true;
     this.setState({});
+    if (this.el) this.el.removeEventListener('click', this.startup);
   };
   constructor(props: any) {
     super(props);
@@ -21,6 +21,7 @@ class App extends Component {
       .play()
       .then(
         () => {
+          console.log('lucky');
           this.started = true;
           this.setState({});
         },
@@ -32,7 +33,6 @@ class App extends Component {
   }
   el: HTMLDivElement | null = null;
   render() {
-    console.log('well?', this.started);
     if (!this.started)
       return (
         <div
